@@ -1,4 +1,4 @@
 import User from "./User";
-import UserResolvers from "./resolvers";
+import UserResolvers from "./UserResolver";
 
 export { User, UserResolvers };

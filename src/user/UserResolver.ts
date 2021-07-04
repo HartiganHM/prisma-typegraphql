@@ -4,7 +4,7 @@ import { Context } from "types";
 import User from "./User";
 
 @Resolver(User)
-class UserResolvers {
+class UserResolver {
   //* GQL Type of single User
   @Query(() => User, { nullable: true })
   async user(
@@ -29,4 +29,4 @@ class UserResolvers {
   }
 }
 
-export default UserResolvers;
+export default UserResolver;
