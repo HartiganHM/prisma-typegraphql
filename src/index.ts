@@ -1,13 +1,30 @@
-import { PrismaClient } from '@prisma/client';
-import { Context } from 'apollo-server-core';
-
-//* For implementation #2
-//! Should be top-most import
 import 'reflect-metadata';
-import { buildSchemaSync } from 'type-graphql';
+import { PrismaClient } from '@prisma/client';
 import { ApolloServer } from 'apollo-server';
+import { buildSchemaSync } from 'type-graphql';
 
+import { Context } from 'types';
 import { UserResolvers } from 'user';
+
+const PORT = 4000;
+const prisma = new PrismaClient();
+
+//* Build schema with resolvers through Type GraphQL
+const schema = buildSchemaSync({
+  resolvers: [UserResolvers],
+});
+const server = new ApolloServer({
+  schema,
+  //* Prisma must be privided to other resolvers through context
+  context: (): Context => ({ prisma }),
+});
+
+// * App listen on port 4000
+server.listen(PORT, () =>
+  console.log(`🚀  Server running on http://localhost:${PORT}/graphql`),
+);
+
+// ---------------------------- Other Implementations Below ----------------------------
 
 //* For implementation #3
 //! Should be top-most import
@@ -17,9 +34,6 @@ import { UserResolvers } from 'user';
 // import { ApolloServer } from 'apollo-server';
 // import { Context } from 'apollo-server-core';
 // import { buildSchemaSync } from 'type-graphql';
-
-const PORT = 4000;
-const prisma = new PrismaClient();
 
 /**
  * ! #3
@@ -41,6 +55,12 @@ const prisma = new PrismaClient();
 // server.listen(PORT, () =>
 //   console.log(`🚀  Server running on http://localhost:${PORT}/graphql`),
 // );
+
+//* For implementation #2
+//! Should be top-most import
+// import 'reflect-metadata';
+// import { buildSchemaSync } from 'type-graphql';
+// import { ApolloServer } from 'apollo-server';
 
 /**
  * ! #2
@@ -86,21 +106,6 @@ const prisma = new PrismaClient();
 //     return allUsers;
 //   }
 // }
-
-//* Build schema with resolvers through Type GraphQL
-const schema = buildSchemaSync({
-  resolvers: [UserResolvers],
-});
-const server = new ApolloServer({
-  schema,
-  //* Prisma must be privided to other resolvers through context
-  context: (): Context => ({ prisma }),
-});
-
-// * App listen on port 4000
-server.listen(PORT, () =>
-  console.log(`🚀  Server running on http://localhost:${PORT}/graphql`),
-);
 
 /**
  * ! #1
