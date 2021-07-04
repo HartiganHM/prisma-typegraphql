@@ -1,10 +1,20 @@
-import { Resolver, Query, Arg, Ctx } from "type-graphql";
+import { Resolver, Query, Arg, Ctx, FieldResolver, Root } from "type-graphql";
 
 import { Context } from "types";
 import User from "./User";
+import { Post } from "post";
 
 @Resolver(User)
 class UserResolver {
+  @FieldResolver()
+  async posts(@Root() user: User, @Ctx() { prisma }: Context): Promise<Post[]> {
+    const posts = await prisma.user
+      .findUnique({ where: { id: user.id } })
+      .posts();
+
+    return posts;
+  }
+
   //* GQL Type of single User
   @Query(() => User, { nullable: true })
   async user(
