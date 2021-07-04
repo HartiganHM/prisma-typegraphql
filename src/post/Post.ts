@@ -17,7 +17,7 @@ class Post {
   title: string;
 
   @Field(() => String, { nullable: true })
-  content: string | null;
+  content?: string | null;
 
   @Field()
   published: boolean;
