@@ -6,7 +6,7 @@ class Profile {
   @Field(() => ID)
   id: number;
 
-  @Field()
+  @Field(() => String, { nullable: true })
   bio?: string;
 
   @Field(() => User, { nullable: true })
