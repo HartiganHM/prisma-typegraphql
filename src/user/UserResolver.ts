@@ -3,6 +3,7 @@ import { Resolver, Query, Arg, Ctx, FieldResolver, Root } from "type-graphql";
 import { Context } from "types";
 import User from "./User";
 import { Post } from "post";
+import { Profile } from "profile";
 
 @Resolver(User)
 class UserResolver {
@@ -13,6 +14,18 @@ class UserResolver {
       .posts();
 
     return posts;
+  }
+
+  @FieldResolver()
+  async profile(
+    @Root() user: User,
+    @Ctx() { prisma }: Context
+  ): Promise<Profile | null> {
+    const profile = await prisma.user
+      .findUnique({ where: { id: user.id } })
+      .profile();
+
+    return profile;
   }
 
   //* GQL Type of single User
