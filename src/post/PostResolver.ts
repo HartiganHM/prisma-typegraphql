@@ -7,12 +7,22 @@ import Post from "./Post";
 @Resolver(Post)
 class PostResolver {
   @FieldResolver()
-  async author(@Root() post: Post, @Ctx() { prisma }: Context): Promise<User | null> {
+  async author(
+    @Root() post: Post,
+    @Ctx() { prisma }: Context
+  ): Promise<User | null> {
     const author = await prisma.post
       .findUnique({ where: { id: post.id } })
       .author();
 
     return author;
+  }
+
+  @Query(() => [Post])
+  async posts(@Ctx() { prisma }: Context): Promise<Post[]> {
+    const posts = await prisma.post.findMany();
+
+    return posts;
   }
 
   @Query(() => Post, { nullable: true })
