@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018", "dom", "esnext", "esnext.asynciterable"], // Last item for apollo
+    "sourceMap": true,
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "declaration": false,
+    "composite": false,
+    "removeComments": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true, // Allows removal of import * as
+    "esModuleInterop": true, // Allows removal of import * as
+    "emitDecoratorMetadata": true, // For type-graphql
+    "experimentalDecorators": true, // For type-graphql
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.tsx", "./src/**/*.ts"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
