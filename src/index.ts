@@ -5,6 +5,7 @@ import { buildSchemaSync } from "type-graphql";
 
 import { Context } from "types";
 import { PostResolvers } from "post";
+import { ProfileResolver } from "profile";
 import { UserResolvers } from "user";
 
 const PORT = 4000;
@@ -12,7 +13,7 @@ const prisma = new PrismaClient();
 
 //* Build schema with resolvers through Type GraphQL
 const schema = buildSchemaSync({
-  resolvers: [PostResolvers, UserResolvers],
+  resolvers: [PostResolvers, ProfileResolver, UserResolvers],
 });
 const server = new ApolloServer({
   schema,
