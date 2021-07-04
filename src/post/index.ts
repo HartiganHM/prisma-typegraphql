@@ -1,4 +1,4 @@
 import Post from "./Post";
-import PostResolvers from "./resolvers";
+import PostResolvers from "./PostResolver";
 
 export { Post, PostResolvers };
