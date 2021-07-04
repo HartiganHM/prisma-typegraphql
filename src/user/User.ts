@@ -1,5 +1,6 @@
-import { Post } from 'post';
-import { ObjectType, Field } from 'type-graphql';
+import { Post } from "post";
+import { Profile } from "profile";
+import { ObjectType, Field } from "type-graphql";
 
 @ObjectType()
 class User {
@@ -14,6 +15,9 @@ class User {
 
   @Field(() => [Post], { nullable: true })
   posts?: Post[];
+
+  @Field(() => Profile, { nullable: true })
+  profile?: Profile;
 }
 
 export default User;
