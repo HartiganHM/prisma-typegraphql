@@ -7,10 +7,10 @@ class Profile {
   id: number;
 
   @Field(() => String, { nullable: true })
-  bio?: string;
+  bio?: string | null;
 
   @Field(() => User, { nullable: true })
-  user: User;
+  user?: User | null;
 
   @Field()
   userId: number;
